@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Caesar Cipher | Encode. Decode. Protect Your Message.</title>
+<meta name="description" content="A modern pink cryptography dashboard to encrypt and decrypt messages with the classic Caesar Cipher shift technique." />
+<meta property="og:title" content="Caesar Cipher — Encode. Decode. Protect Your Message." />
+<meta property="og:description" content="Interactive Caesar Cipher tool with live alphabet shift visualization, stats and instant encryption." />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="bg-deco" aria-hidden="true">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+  <div id="glyphs"></div>
+</div>
+
+<header class="header">
+  <div class="wrap nav">
+    <div class="brand">🔐 CAESAR CIPHER</div>
+    <nav class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#encrypt">Encrypt</a>
+      <a href="#decrypt">Decrypt</a>
+      <a href="#about">About</a>
+    </nav>
+    <div class="status"><span class="dot"></span> SYSTEM READY</div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section id="home" class="hero wrap">
+    <span class="tag">ENCODE • DECODE • PROTECT YOUR MESSAGE</span>
+    <h1>Caesar Cipher</h1>
+    <p class="sub">A classic encryption technique for transforming messages using a simple shift.</p>
+    <div class="hero-btns">
+      <a href="#encrypt" class="btn btn-primary" id="startBtn">Start Encrypting</a>
+      <a href="#about" class="btn btn-ghost">Learn How It Works</a>
+    </div>
+    <div class="wheel-wrap">
+      <div class="wheel">
+        <div class="ring"></div>
+        <div class="ring inner"></div>
+        <div class="wheel-core">🔑</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CIPHER TOOL -->
+  <section id="encrypt" class="wrap">
+    <div class="section-head reveal-on-scroll">
+      <h2>Cipher Console</h2>
+      <p>Type a message, pick a shift, and transform it instantly.</p>
+    </div>
+
+    <div class="glass tool reveal-on-scroll">
+      <div class="field-label"><label for="message">Enter Your Message</label><span>Ctrl + Enter to run</span></div>
+      <textarea id="message" placeholder="Type your message here..."></textarea>
+
+      <div class="row">
+        <div class="slider-card">
+          <div class="field-label"><label for="shiftRange">Shift Value</label>
+            <input type="number" id="shiftNumber" min="0" max="25" value="3" style="width:86px" />
+          </div>
+          <div class="shift-value"><span id="shiftValue">3</span></div>
+          <input type="range" id="shiftRange" min="0" max="25" value="3" />
+          <div class="range-scale"><span>0</span><span>13</span><span>25</span></div>
+        </div>
+
+        <div id="decrypt">
+          <div class="field-label"><span>Mode</span></div>
+          <div class="modes">
+            <button class="mode-btn active" id="modeEncrypt" type="button">🔒 Encrypt</button>
+            <button class="mode-btn" id="modeDecrypt" type="button">🔓 Decrypt</button>
+          </div>
+          <div class="field-label" style="margin-top:16px"><span>Run</span></div>
+          <button class="btn btn-primary" id="actionBtn" type="button" style="width:100%;justify-content:center;padding:15px">
+            <span id="actionLabel">ENCRYPT MESSAGE</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- OUTPUT -->
+    <div class="glass output-card reveal-on-scroll" id="outputCard">
+      <div class="field-label"><span>Encrypted / Decrypted Result</span></div>
+      <div class="output-box empty" id="outputBox">Your result will appear here...</div>
+      <div class="out-actions">
+        <button class="btn btn-primary" id="copyBtn" type="button">📋 Copy Result</button>
+        <button class="btn btn-ghost" id="clearBtn" type="button">🧹 Clear</button>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats">
+      <div class="glass stat reveal-on-scroll"><div class="num" id="statChars">0</div><div class="lbl">Characters</div></div>
+      <div class="glass stat reveal-on-scroll"><div class="num" id="statLetters">0</div><div class="lbl">Letters</div></div>
+      <div class="glass stat reveal-on-scroll"><div class="num" id="statShift">3</div><div class="lbl">Shift</div></div>
+    </div>
+  </section>
+
+  <!-- VISUALIZATION -->
+  <section class="wrap">
+    <div class="section-head reveal-on-scroll">
+      <h2>Alphabet Shift Visualization</h2>
+      <p>The bottom row updates live with your selected shift.</p>
+    </div>
+    <div class="glass viz reveal-on-scroll">
+      <div class="alpha-row" id="alphaTop"></div>
+      <div class="arrow-line">▼ ▼ ▼</div>
+      <div class="alpha-row" id="alphaBottom"></div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="about" class="wrap">
+    <div class="section-head reveal-on-scroll">
+      <h2>How Caesar Cipher Works</h2>
+      <p>Five simple steps behind one of history's oldest ciphers.</p>
+    </div>
+    <div class="steps">
+      <div class="glass step reveal-on-scroll"><div class="n">1</div><h3>Select a shift value</h3><p>Choose any number between 0 and 25 as your secret key.</p></div>
+      <div class="glass step reveal-on-scroll"><div class="n">2</div><h3>Move each letter</h3><p>Every letter travels forward by that number of positions.</p></div>
+      <div class="glass step reveal-on-scroll"><div class="n">3</div><h3>Wrap around Z</h3><p>After Z the alphabet loops back to A, keeping it in range.</p></div>
+      <div class="glass step reveal-on-scroll"><div class="n">4</div><h3>Get ciphertext</h3><p>The shifted text becomes your encrypted message.</p></div>
+      <div class="glass step reveal-on-scroll"><div class="n">5</div><h3>Reverse to decrypt</h3><p>Shifting backward by the same key restores the original.</p></div>
+    </div>
+    <div class="example" id="mapExample"></div>
+  </section>
+
+  <!-- SECURITY -->
+  <section class="wrap">
+    <div class="security reveal-on-scroll">
+      <div class="icon">🛡️</div>
+      <div>
+        <h2>Is Caesar Cipher Secure?</h2>
+        <p>Caesar Cipher is an educational classical encryption technique. Because there are only 26 possible shifts, it can be easily broken using brute force and should not be used to protect real sensitive information.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="wrap">
+    <div class="section-head reveal-on-scroll">
+      <h2>Why You'll Like It</h2>
+      <p>Built for learning, made to look good.</p>
+    </div>
+    <div class="features">
+      <div class="glass feature reveal-on-scroll"><div class="emoji">⚡</div><h3>Fast Encryption</h3><p>Instantly transform messages.</p></div>
+      <div class="glass feature reveal-on-scroll"><div class="emoji">🔐</div><h3>Simple Cryptography</h3><p>Understand the fundamentals of substitution ciphers.</p></div>
+      <div class="glass feature reveal-on-scroll"><div class="emoji">🎯</div><h3>Interactive</h3><p>Change the shift and see the transformation immediately.</p></div>
+      <div class="glass feature reveal-on-scroll"><div class="emoji">📱</div><h3>Responsive</h3><p>Works beautifully on desktop, tablet, and mobile.</p></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="fbrand">🔐 CAESAR CIPHER</div>
+    <p>Educational Cryptography Project</p>
+    <p class="built">Built with HTML • CSS • JavaScript</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
