@@ -10,11 +10,11 @@ export const Route = createFileRoute("/")({
         content:
           "A modern pink cryptography dashboard to encrypt and decrypt messages with the classic Caesar Cipher shift technique.",
       },
-      { property: "og:title", content: "Caesar Cipher — Encode. Decode. Protect Your Message." },
+      { property: "og:title", content: "Caesar Cipher | Encode. Decode. Protect Your Message." },
       {
         property: "og:description",
         content:
-          "Interactive Caesar Cipher tool with live alphabet shift visualization, stats and instant encryption.",
+          "A modern pink cryptography dashboard to encrypt and decrypt messages with the classic Caesar Cipher shift technique.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
